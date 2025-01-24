@@ -40,12 +40,35 @@ class CustomerController extends Controller
                 ->with('success', 'Customer updated successfully');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $item = CustomerModel::find($id);
         $item->delete();
+        return redirect(route('customers.index'))
+            ->with('success', 'Customer deleted successfully');
+    }
+
+    public function create()
+    {
+        return view("customer.create");
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'tel' => 'required|string|max:255',
+            ]
+        );
+
+        $item = new CustomerModel();
+        $item->name = $request->input("name");
+        $item->tel = $request->input("tel");
+        $item->save();
 
         return redirect(route('customers.index'))
-                ->with('success', 'Customer deleted successfully');
+                ->with('success', 'Product created successfully');;
     }
+
 }
