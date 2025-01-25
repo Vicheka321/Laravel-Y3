@@ -29,7 +29,9 @@ Route::get('/nu', function () {
     return view('hello');
 });
 
-Route::get('/student', [StudentController::class, 'index']);
+Route::get('/example', function () {
+    return view('example');
+});
 
 Route::get('/st/{x}/{y}', [StudentController::class, 'calc']);
 
@@ -45,3 +47,17 @@ Route::get('/customers/{id}', [CustomerController::class, 'show123'])->name("cus
 Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name("customers.edit");
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name("customers.update");
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name("customers.destroy");
+
+
+
+
+
+Route::get('/student/create', [StudentController::class, 'create'])->name("student.create");
+Route::post('/student', [StudentController::class, 'store'])->name("student.store");
+Route::get('/student', [StudentController::class, 'index'])->name("student.index");
+Route::get('/student/{student_id}', [StudentController::class, 'view'])->name("student.view");
+Route::get('/student/{student_id}/edit', [StudentController::class, 'edit'])->name("student.edit");
+Route::put('/student/{student_id}', [StudentController::class, 'update'])->name("student.update");
+Route::delete('/student/{student_id}', [StudentController::class, 'destroy'])->name("student.destroy");
+
+
